@@ -52,9 +52,9 @@ A responsive web-based reminder management system built with ASP.NET MVC (C#) fe
    2. **Complete Form Fields**  
    ```markdown
    
-   | Field         | Description                  | Example Value    |
-   |---------------|------------------------------|------------------|
-   | Time          | 24-hour time picker          | 20:03            |
+   | Field         | Description                   | Example Value    |
+   |---------------|----------------------------- -|------------------|
+   | Time          | 24-hour time picker           |  20:03           |
    | Message       | (255 character limit)         | "Team Meeting"   |
    | Status        | Auto-set to "Pending"         | (Non-editable)   |
 
