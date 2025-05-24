@@ -95,10 +95,11 @@ Interaction Flow:
 💾 Data Persistence
 
 Entries stored with status tracking:
+   ```markdown
 <ReminderRecord>
   <ID>RM-20240524-1324</ID>
   <TriggerTime>2024-05-24T20:03:00</TriggerTime>
-  <Message>WHEN DOES?</Message>
+  <Message>Finish report</Message>
   <Status>Pending</Status>
   <Created>2024-05-24T13:24:01</Created>
 </ReminderRecord>
