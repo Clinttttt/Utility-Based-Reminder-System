@@ -63,6 +63,7 @@ A responsive web-based reminder management system built with ASP.NET MVC (C#) fe
 
 🔄 Reminder Lifecycle
 Table Management:
+   ```markdown
 Time	Message	Status	Actions
 8:03  Finish report	✏️ 🗑️
 7:37 Buy milk	✏️ 🗑️
