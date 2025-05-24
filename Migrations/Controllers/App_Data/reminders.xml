@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Reminders xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Reminder>
+    <Id>1</Id>
+    <Content>Buy milk</Content>
+    <TriggerTime>2025-05-24T06:00:00</TriggerTime>
+    <IsNotified>true</IsNotified>
+    <IsDelivered>true</IsDelivered>
+  </Reminder>
+  <Reminder>
+    <Id>4</Id>
+    <Content>Book hotel</Content>
+    <TriggerTime>2025-05-24T10:32:00</TriggerTime>
+    <IsNotified>true</IsNotified>
+    <IsDelivered>true</IsDelivered>
+  </Reminder>
+  <Reminder>
+    <Id>3</Id>
+    <Content>Team lunch</Content>
+    <TriggerTime>2025-05-24T12:12:00</TriggerTime>
+    <IsNotified>true</IsNotified>
+    <IsDelivered>true</IsDelivered>
+  </Reminder>
+  <Reminder>
+    <Id>2</Id>
+    <Content>Gift Sarah</Content>
+    <TriggerTime>2025-05-24T21:46:00</TriggerTime>
+    <IsNotified>false</IsNotified>
+    <IsDelivered>false</IsDelivered>
+  </Reminder>
+  <Reminder>
+    <Id>6</Id>
+    <Content>Finish report</Content>
+    <TriggerTime>2025-05-24T23:23:00</TriggerTime>
+    <IsNotified>false</IsNotified>
+    <IsDelivered>false</IsDelivered>
+  </Reminder>
+  <Reminder>
+    <Id>8</Id>
+    <Content>Take meds</Content>
+    <TriggerTime>2025-05-24T23:30:00</TriggerTime>
+    <IsNotified>false</IsNotified>
+    <IsDelivered>false</IsDelivered>
+  </Reminder>
+  <Reminder>
+    <Id>7</Id>
+    <Content>Meeting with team at 11 pm today</Content>
+    <TriggerTime>2025-05-24T23:40:00</TriggerTime>
+    <IsNotified>false</IsNotified>
+    <IsDelivered>false</IsDelivered>
+  </Reminder>
+  <Reminder>
+    <Id>5</Id>
+    <Content>Take meds</Content>
+    <TriggerTime>2025-05-24T23:42:00</TriggerTime>
+    <IsNotified>false</IsNotified>
+    <IsDelivered>false</IsDelivered>
+  </Reminder>
+  <Reminder>
+    <Id>0</Id>
+    <Content>Develop and maintain relationships with key partners.</Content>
+    <TriggerTime>2025-05-24T23:31:00</TriggerTime>
+    <IsNotified>false</IsNotified>
+    <IsDelivered>false</IsDelivered>
+  </Reminder>
+</Reminders>

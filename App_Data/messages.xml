@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfChatMessage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ChatMessage>
+    <Id>10</Id>
+    <Content>23r222f</Content>
+    <DeliveryTime>0011-12-01T13:11:00</DeliveryTime>
+    <IsFromUser>true</IsFromUser>
+  </ChatMessage>
+  <ChatMessage>
+    <Id>11</Id>
+    <Content>22313111</Content>
+    <DeliveryTime>1312-12-11T03:13:00</DeliveryTime>
+    <IsFromUser>true</IsFromUser>
+  </ChatMessage>
+  <ChatMessage>
+    <Id>12</Id>
+    <Content>we have an appointment tommorow</Content>
+    <DeliveryTime>2025-05-23T12:37:00</DeliveryTime>
+    <IsFromUser>true</IsFromUser>
+  </ChatMessage>
+  <ChatMessage>
+    <Id>13</Id>
+    <Content>hi good eve</Content>
+    <DeliveryTime>2005-05-23T13:45:00</DeliveryTime>
+    <IsFromUser>true</IsFromUser>
+  </ChatMessage>
+</ArrayOfChatMessage>
