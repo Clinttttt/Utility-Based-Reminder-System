@@ -12,9 +12,8 @@ A responsive web-based reminder management system built with ASP.NET MVC (C#) fe
 - ⏰ Set precise alert times with datetime picker
 - ✏️ Edit existing reminders dynamically
 - 🗑️ Delete reminders with confirmation
-- 🔔 Popup notifications with alert sounds
+- 🔔 Popup notifications
 - 📋 Interactive list view of all reminders
-- 📱 Responsive design for all devices
 - 📊 Syncfusion UI components integration
 - 🛠️ Entity Framework data management
 
