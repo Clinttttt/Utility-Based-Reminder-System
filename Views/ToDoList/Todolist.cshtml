@@ -1,0 +1,458 @@
+﻿@model List<Todolist>
+
+<body class="body_todolist">
+</body>
+
+<!-- first container -->
+<div class=" col-12 justify-content-around rounded-3 todo col first_container">
+    <form asp-controller="ToDoList" asp-action="Createtask" method="post">
+
+        <input type="text" class=" my-4 mx-4 form-control-sm first_input" style="background-color:rgb(211, 207, 208); margin-left:15px; color:black;" placeholder="Enter Data" name="Description" />
+        <button class="btn rounded-1  bg-gradient  btn-sm text-dark mx-2" style="background-color:rgb(209, 204, 205);">Create task</button>
+    </form>
+
+    <div class="container position-relative overflow-scroll">
+        <div class="overflow-auto" style="height:370px;">
+            @foreach (var task in Model)
+            {
+                <table class="mx-3">
+
+                    <thead>
+
+                        <tr>
+                            <th>
+                                <form asp-controller="ToDoList" asp-action="Delete" method="post">
+                                    <button type="submit" class=" btn  btn-sm rounded-1 my-2 fs-5 btn-todo delete_button mx-1 fw-bolder" style="background-color:none; font-size:25px; color:darkred;"><i class="bi bi-x-lg"></i></button>
+                                    <input type="hidden" name="id" value="@task.Id" />
+
+                                </form>
+                            </th>
+                            <th>
+                                @if (task.Isdone)
+                                {
+                                    <form asp-action="UnMmarkAsDone" asp-controller="ToDoList" method="post">
+                                <th><span><button type="submit" class="btn btn-sm rounded-1  d-flex justify-content-center align-items-center markusdone" style="max-width:30px; max-height:30px; font-size:22px;margin-left:-5px;"><span><i class="bi bi-check-lg"></i></span></button></span></th>
+                                <th class="p-lg-3" style="text-align:right;"> <span style="text-decoration:line-through;">@task.Description</span></th>
+                                <input type="hidden" name="id" value="@task.Id" />
+                                </form>
+                                }
+                                else
+                                {
+                                <form asp-action="MarkAsDone" asp-controller="ToDoList" asp-route-id="@task.Id" method="post">
+                                    <button type="submit" class="btn text-dark btn-sm rounded-1  d-flex justify-content-center align-items-center markasdone" style="max-width:30px; max-height:30px; font-size:22px; margin-left:-10px;">
+                                        <span>
+                                            <i class="bi bi-check2-circle"></i>
+                                        </span>
+                                    </button>
+                                <th class="p-lg-3" style="text-align:right;"><span>@task.Description</span></th>
+
+
+                                </form>
+                                }
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+<!-- main container -->
+<div class="col-12 container-task-prioritation rounded-3"
+     style="background: rgb(198, 198, 198);">
+    <h5 class="text-dark my-4 fw-bolder" style="padding-left:133px;">Organization and Journaling </h5>
+    <hr class="horizontal-line  " style="width:100%" />
+    <div>
+        <table>
+            <thead>
+                <tr>
+
+                    <th class=" rounded-1   p-1 mx-2 my-n2 top-border-inside_container">
+                        <div class="container_button">
+                            <form method="post" asp-action="toggle_calendar">
+                                <div style="margin-left:5px;">
+                                    <button type="submit" class=" button-calendar bg-transparent px-4 fs-4" name="value" value="@(ViewBag.toggle_calendar == true ? "hide_calendar" : "showcalendar")" style="position:absolute; top:0; bottom:0; font-size:2rem;" role="button">
+                                        <span class="text">Date Note</span><span>Show</span>
+                                    </button>
+                                </div>
+                            </form>
+                            <form method="post" asp-action="reminder_note">
+                                <div style="margin-left:220px; position:center;" class="py-2">
+                                    <button type="submit" class="bg-transparent note_button_write px-4 fs-4 mx-3" style="position:absolute; top:0; bottom:0; font-size:2rem;" name="reminder_value" value="@(ViewBag.reminder_note == true ? "hidereminder" : "showreminder")" role="button">
+                                        <span class="text">Reminder</span><span>Show</span>
+                                    </button>
+                                </div>
+                            </form>
+
+
+                            <form method="post" asp-action="Note_Write">
+                                <div class="button_notes" style="margin-left:463px;">
+                                    <button type="submit" class="bg-transparent note_button_write px-4 fs-4" style="position:absolute; top:0; bottom:0; font-size:2rem;" name="notes_value" value="@(ViewBag.Note_Write == true ? "hidenote" : "shownote")" role="button">
+                                        <span class="text"> Day Note</span><span>Show</span>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div class="horizontal-line-2 mx-1 "></div>
+
+                            @if (ViewBag.toggle_calendar)
+                            {
+                                <div class="specific-calendar border-4">
+                                    @Html.EJS().Calendar("calendar").Change("OncalendarChange").Render()
+
+                                </div>
+                            }
+                            @if (ViewBag.Note_Write)
+                            {
+                                <!-- if i click notes button  -->
+                                <div class="container_note  rounded-top-4" style="margin-top:13px;">
+                                    <form asp-action="Create_Note" method="post">
+                                        <input name="note_title" class="text-primary text_whats_on_your_mind fw-bold" id="title_note" placeholder="Title here!" type="text" />
+                                        <div class="line_wrapper">
+                                            <div class="vertical_line"></div>
+                                        </div>
+                                        <div class="container_notes">
+                                            <textarea name="note_description" class="input_notes text-primary " id="write_note" type="text" placeholder="Whats on your mind?"></textarea>
+                                        </div>
+                                        <button class="btn button_note_write btn-sm bg-primary text-light" type="submit">okay</button>
+
+                                        <button class="btn button_note_cancel btn-sm bg-primary text-light bg-">cancel</button>
+                                    </form>
+                                    <div class="container-note" style="margin-top:-330px; margin-left:300px;">
+                                        <div class="row">
+                                            <div class="overflow-auto" style="height:305px;">
+                                                <div class="d-flex flex-wrap">
+                                                    @if (ViewBag.Notes != null)
+                                                    {
+                                                        @foreach (var note in (List<Todolist>)ViewBag.Notes)
+                                                        {
+                                                            @if (!string.IsNullOrWhiteSpace(note.note_title) && !string.IsNullOrWhiteSpace(note.note_description))
+                                                            {
+                                                                <div class="me-2 mb-2 card_note" style="width:17rem;">
+                                                                    <div class="card small-card" style="height:auto; background-color:rgb(198, 198, 198)">
+                                                                        <div class="card-header">
+                                                                            <h5 class="text-dark fw-bold" style="font-size:20px; text-align:center;">@note.note_title</h5>
+                                                                        </div>
+                                                                        <div class="card-body">
+
+                                                                            <div>
+                                                                                @(note.note_description != null ? note.note_description.Substring(0, Math.Min(note.note_description.Length, 50)) : "")
+                                                                                <span class="collapse" id="note-full-@note.Id">@(note.note_description != null && note.note_description.Length > 50 ? note.note_description.Substring(50) : "")</span>
+                                                                            </div>
+                                                                            <div class="d-flex justify-content-end" style="margin-top: 10px;">
+                                                                                <button class="btn  btn-sm button_readmore me-2 " data-bs-toggle="collapse" data-bs-target="#note-full-@note.Id" style="font-size:0.6rem; padding:2px 3px;">
+                                                                                    <span class="d-block collapse show" data-bs-toggle="collapse" data-bs-target="#note-full-@note.Id">Read more</span>
+                                                                                </button>
+
+                                                                                <button class="btn button_edit me-2" data-bs-toggle="modal" data-bs-target="#editNoteModal-@note.Id"><i class="bi bi-pen-fill"></i></button>
+                                                                                <form asp-action="Delete_note" method="post">
+                                                                                    <button class="btn button_delete"><i class="bi bi-trash-fill"></i></button>
+                                                                                    <input type="hidden" name="id_note" value="@note.Id" />
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Eding note modal -->
+                                                                <div class="modal fade" id="editNoteModal-@note.Id" tabindex="-1" aria-labelledby="editNoteModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header pb-2">
+                                                                                <h5 class="modal-title" id="editNoteModalLabel">Edit Note</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <form asp-action="Edit_note" method="post">
+                                                                                <div class="modal-body pt-2 p-4">
+                                                                                    <input type="hidden" name="id" value="@note.Id" />
+                                                                                    <div class="form-group mb-3">
+                                                                                        <label for="note_title" class="mb-1">Title</label>
+                                                                                        <input type="text" class="form-control" id="note_title" name="note_title" value="@note.note_title">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="note_description" class="mb-1">Description</label>
+                                                                                        <textarea class="form-control" id="note_description" name="note_description">@note.note_description</textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>No note available</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }@if (ViewBag.reminder_note)
+                            {
+                                <!-- if i click reminder button  -->
+                                <div class="reminder-list mt-2" style="height: 330px; overflow-y: auto; border-radius: 8px; border: 1px solid #dee2e6; width:100%; margin-left:4px;">
+                                    <table class="table table-sm mb-0 position-relative">
+                                        <thead style="position: sticky; top: 0; background: rgb(167, 161, 163); z-index: 2;">
+                                            <tr style="background-color: rgb(167, 161, 163);">
+                                                <th style="width: 20%; min-width: 100px;" class="text-dark">Time</th>
+                                                <th style="width: 50%; min-width: 300px;" class="text-dark">Message</th>
+                                                <th style="width: 20%;" class="text-dark">
+                                                    <div class="d-flex justify-content-between align-items-center" style="margin-left:-70px;">
+                                                        <span class="me-2">XML Data</span>
+                                                        <form method="post" asp-action="ToggleXml">
+                                                            <button type="submit" class="btn btn-dark text-white btn-xs rounded-1">
+                                                                @((ViewBag.ShowXml ?? false) ? "Hide" : "Show")
+                                                            </button>
+                                                            <input type="hidden" name="value_xml"
+                                                                   value="@((ViewBag.ShowXml ?? false) ? "hide_xml" : "show_xml")" />
+                                                        </form>
+                                                    </div>
+                                                </th>
+                                                <th style="width: 10%;">
+                                                    <div class="d-flex justify-content-end">
+                                                        <button class="btn btn-dark text-white btn-xs rounded-1"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#reminderModal">
+                                                            Add
+                                                        </button>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <!-- to dispaly xml here  -->
+                                        @if (ViewBag.ShowXml ?? false)
+                                        {
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4" style="padding:0;border:none;">
+                                                        <div style="height:280px;padding:10px;">
+                                                            <pre style="margin:0;background:#f8f9fa;border-radius:5px;height:100%;overflow:auto;">
+                                                            <code>@ViewBag.XmlContent</code>
+                                        </pre>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        }
+                                        else
+                                        {
+                                            <tbody style="position:relative;">
+                                                @foreach (var reminder in ViewBag.Reminders)
+                                                {
+                                                    <tr>
+                                                        <td style="position:relative" class="pe-3 text-dark">
+                                                            @reminder.TriggerTime.ToString("h:mm tt")
+                                                            <div class="vertical-divider"></div>
+                                                        </td>
+                                                        <td style="word-wrap:break-word;white-space:pre-wrap" class="pe-3 text-dark">
+                                                            @reminder.Content
+                                                            <div class="vertical-divider"></div>
+                                                        </td>
+                                                        <td colspan="2">
+                                                            <div class="d-flex" style="padding-left:80px;">
+                                                                <button class="btn btn-link text-dark button_edit_reminder"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editReminderModal"
+                                                                        data-id="@reminder.Id"
+                                                                        data-content="@reminder.Content"
+                                                                        data-trigger="@reminder.TriggerTime.ToString("yyyy-MM-ddTHH:mm")">
+                                                                    <i class="bi bi-pencil-square fs-4"></i>
+                                                                </button>
+                                                                <form asp-controller="ToDoList" asp-action="DeleteReminder" method="post">
+                                                                    @Html.AntiForgeryToken()
+                                                                    <input type="hidden" name="id" value="@reminder.Id" />
+                                                                    <button type="submit" class="btn btn-link text-danger button_delete_reminder mx-2">
+                                                                        <i class="bi bi-trash fs-3"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        }
+                                    </table>
+                                </div>
+                            }
+                            <!-- jquery nga logic drea naga show og form sa calendar logic  -->
+                            <div id="popup-form" style="display:none;">
+                                <script>
+                                    function OncalendarChange(args){
+                                        var selectedDate = args.value.toLocaleDateString('en-CA');
+                                            $("#popup-form").load('@Url.Action("GetEvent", "Todolist")'+ "?date=" + selectedDate)
+                                            $("#popup-form").show();
+                                    }
+                                </script>
+
+                            </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="container-calendar  mx-2" style="max-width:580px; height:310px; margin-top:80px;">
+    </div>
+</div>
+<!-- last container  -->
+<div class="col-12 container-lastly rounded-3">
+    <div class="first_container_lastcontainer border-2 mx-1">
+        <h5 class="reminder_label text-center">Reminder</h5>
+        <div class="horizontal-line my-2" style="margin-left:-3px;"></div>
+
+
+        <div class="notifications">
+            @foreach (var reminder in ViewBag.UpcomingReminders)
+            {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top:-100px;">
+                    <strong>🔔 Reminder:</strong> @reminder.Content at @reminder.TriggerTime.ToString("h:mm tt")
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+        </div>
+
+
+
+
+
+    </div>
+    <div class="col-12 container-scheduled-messages rounded-3" style="margin-top:-222px; margin-left:0;">
+        <div class="scheduled-container border-2 mx-1 p-2" style="margin-top:-1px;">
+            <h5 class="text-center mb-2 fs-6">Scheduled Messages</h5>
+            <div class="horizontal-line my-1" style="margin-left:-12px;"></div>
+
+            <div class="scheduled-list" style="max-height: 412px; overflow-y: auto; ">
+                <table class="table table-hover table-sm small">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%; font-size: 0.8rem; text-align: left;">Time</th>
+                            <th style="font-size: 0.8rem; text-align: left;">Message</th>
+                            <th style="width: 100px; min-width: 100px; font-size: 0.8rem; text-align: center; padding: 0 8px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var reminder in ViewBag.Reminders)
+                        {
+                            <tr class="py-0">
+                                <td class="align-middle" style="font-size: 0.8rem; text-align: left; padding-left: 10px;">@reminder.TriggerTime.ToString("h:mm tt")</td>
+                                <td class="align-middle" style="font-size: 0.8rem; white-space: normal; word-wrap: break-word; max-width: 200px; text-align: left;">
+                                    @reminder.Content
+                                </td>
+                                <td class="align-middle" style="text-align: center; padding: 0 8px; width: 100px; min-width: 100px;">
+                                    @if (reminder.IsDelivered)
+                                    {
+                                        <span class="badge bg-success py-1 rounded-1 d-inline-block"
+                                              style="font-size: 0.7rem; width: 60px; padding: 4px 0;">Sent</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark py-1 rounded-1 d-inline-block"
+                                              style="font-size: 0.7rem; width: 70px; padding: 4px 0;">Pending</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal reminder drea -->
+<div class="modal fade" id="reminderModal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Reminder</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form asp-action="CreateReminder" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>Message:</label>
+                        <input type="text" class="form-control" name="Content" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Time:</label>
+                        <input type="time" class="form-control" name="TriggerTime" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Edit Reminder Modal Handler
+        $('#editReminderModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+            var content = button.data('content');
+            var triggerTime = button.data('trigger');
+
+            var modal = $(this);
+            modal.find('#editReminderId').val(id);
+            modal.find('#editContent').val(content);
+            modal.find('#editTriggerTime').val(triggerTime);
+        });
+    </script>
+}
+<!-- para mo Refresh the scheduled list every 30 seconds -->
+<script>
+    setInterval(() => {
+        fetch('@Url.Action("Todolist")')
+            .then(response => response.text())
+            .then(data => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+                const newContent = doc.querySelector('.scheduled-list').innerHTML;
+                document.querySelector('.scheduled-list').innerHTML = newContent;
+            });
+    }, 30000);
+</script>
+
+<!-- Edit Reminder Modal -->
+<div class="modal fade" id="editReminderModal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Reminder</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form asp-action="EditReminder" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="Id" id="editReminderId" />
+                    <div class="mb-3">
+                        <label>Message:</label>
+                        <input type="text" class="form-control" name="Content" id="editContent" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Time:</label>
+                        <input type="datetime-local" class="form-control" name="TriggerTime" id="editTriggerTime" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

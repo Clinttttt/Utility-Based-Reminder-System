@@ -1,0 +1,25 @@
+﻿@using (Html.BeginForm("SaveEvent", "ToDoList", FormMethod.Post))
+{
+    <!-- event form -->
+    <div class="addDetails">
+        <div class="inside_container mx-3">
+            <div style="margin-top:30px">
+                <input type="hidden" id="SelectedDate" name="SelectedDate" value="@ViewBag.SelectedDate" />
+                <div class="title_container py-3">
+                    <div style="margin-top:-50px; color:#2F3645;"> <label>Title</label></div>
+                    <input type="text" id="EventTitle" name="EventTitle" class="underlined-data-input data_input " value="@(Model != null ? Model.EventTitle : "")" />
+                </div>
+                <div class="py-2">
+                    <label style="color:#2F3645;">Description</label>
+                </div>
+                <div class="py-2">
+                    <textarea id="EventDescription" name="EventDescription" class="underlined-data-input data_input">@(Model != null ? Model.EventDescription : "")</textarea>
+                </div>
+                <div class="py-3">
+                    <button id="save-btn" class="btn btn-dark rounded-2 my-2 btn-sm">Save</button>
+                    <button id="reminder_button" class="reminder_btn btn btn-dark rounded-2 my-2 btn-sm">Reminder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

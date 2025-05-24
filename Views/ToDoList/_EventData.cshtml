@@ -1,0 +1,40 @@
+﻿@model First_MVC_webApp.Models.CalendarEvent
+
+<!-- event data form  -->
+<div class="event_data ">
+    <div class="title_data py-4 mx-4">
+        <h5 style="color:#2F3645;">Title:</h5>
+        </div>
+        <div class="mx-4" style="margin-top:-13px;">
+        <h5 style="color: #3D3D3D ">@Model.EventTitle</h5>
+       </div>
+       <div class="py-4 mx-4">
+        <h5 style="color:#2F3645;">Description:</h5>
+       </div>
+       <div class="mx-4" style="margin-top:-13px; overflow:scroll;">
+      <div class="overflow-auto" style="height:90px;">
+            <p style="color:#3D3D3D">@Model.EventDescription</p>
+      </div>
+       </div>
+    <div class="write_edit_eventData">
+        <button class="button_write"  onclick="editEvent('@Model.SelectedDate.ToString("yyyy-MM-dd")')"><i class="bi bi-pen"></i></button>
+    </div>
+    <div class="delete_button_container">
+        <form asp-action="DeleteData" asp-controller="ToDoList" method="post">
+            <button class="delete_button_data"> <i class="bi bi-trash2"></i></button>
+            <input type="hidden" name="date" value="@Model.SelectedDate">
+          
+        </form>     
+    </div>
+    <div class="border-button"></div>
+    <script>
+             function editEvent(date){
+             $("#popup-form").load('@Url.Action("EditData", "Todolist")' + "?date=" + date, function() {
+                $("#popup-form").show();
+            });
+        }
+        </script>
+</div>
+
+   
+  
