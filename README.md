@@ -5,7 +5,7 @@ The primary users of RemindMe+ are individuals who need an easy and reliable way
 
 ![Project Banner](./wwwroot/Images/picture_ui.png) <!-- Add your banner image -->
 
-A responsive web-based reminder management system built with ASP.NET MVC (C#) featuring intelligent alert notifications and seamless task management.
+A web-based reminder management system built with ASP.NET MVC (C#) featuring intelligent alert notifications and seamless task management.
 
 ## 🌟 Key Features
 - 🎯 Create personalized reminders with custom messages
