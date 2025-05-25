@@ -55,7 +55,7 @@ A responsive web-based reminder management system built with ASP.NET MVC (C#) fe
    |---------------|----------------------------- -|------------------|
    | Time          | 24-hour time picker           |  20:03           |
    | Message       | (255 character limit)         | "Team Meeting"   |
-   | Status        | Auto-set to "Pending"         | (Non-editable)   |
+   | Status        | Auto-set to "Pending"         | (editable)       |
 
     Save Entry
     Click "Add" to store reminder
