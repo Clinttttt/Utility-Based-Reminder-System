@@ -2,9 +2,6 @@
 The primary users of RemindMe+ are individuals who need an easy and reliable way to manage their daily tasks, appointments, and deadlines without the hassle of complicated tools.
 
 # RemindMe+ - Smart Messaging Utility App
-
-![Project Banner](./wwwroot/Images/picture_ui.png) <!-- Add your banner image -->
-
 A web-based reminder management system built with ASP.NET MVC (C#) featuring intelligent alert notifications and seamless task management.
 
 ## 🌟 Key Features
